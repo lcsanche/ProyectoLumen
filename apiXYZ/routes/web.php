@@ -17,6 +17,11 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->group(['prefix' => 'api'], function () use ($router) {
-    $router->get('pedidos',  ['uses' => 'PedidoCabController@showAllPedidos']);
-  });
+$router->group(['prefix' => 'api/pedidos'], function () use ($router) {
+    $router->get('/',  ['uses' => 'PedidoCabController@showAllPedidos']);
+    $router->get('/{id}',  ['uses' => 'PedidoCabController@showOnePedido']);
+    $router->get('/Client/{id}',  ['uses' => 'PedidoCabController@showPedidoByCliente']);
+    $router->post('/', ['uses' => 'PedidoCabController@createPedido']);
+    $router->post('/{id}', ['uses' => 'PedidoCabController@updatePedido']);
+    $router->delete('/{id}', ['uses' => 'PedidoCabController@deletePedido']);
+});
