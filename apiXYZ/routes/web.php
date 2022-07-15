@@ -20,3 +20,19 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('pedidos',  ['uses' => 'PedidoCabController@showAllPedidos']);
   });
+
+// Respuesta MENU  
+$router->group(['prefix' => 'api'], function () use ($router) {
+    $router->get('menu',  ['uses' => 'MenuController@getMenu']);
+    $router->get('menu/{id}',  ['uses' => 'MenuPlatoController@getMenuSemana']);
+    $router->get('menu/{id}/{dia}',  ['uses' => 'MenuPlatoController@getMenuDia']);
+
+    $router->post('menu',  ['uses' => 'MenuController@postMenu']);
+    $router->post('menu/{id}',  ['uses' => 'MenuPlatoController@postMenuPlato']);
+    $router->post('menu/{id}/{dia}',  ['uses' => 'MenuPlatoController@postMenuPlato']);
+
+    $router->put('menu/{id}/{dia}',  ['uses' => 'MenuPlatoController@postPlatoPorDia']);
+    
+    $router->delete('menu/{id}/{dia}',  ['uses' => 'MenuPlatoController@deletePlatoPorDia']);
+});
+//

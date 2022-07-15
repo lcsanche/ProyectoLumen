@@ -10,6 +10,7 @@
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
+        "flipbox/lumen-generator": "^9.1",
         "mockery/mockery": "^1.4.4",
         "phpunit/phpunit": "^9.5.10"
     },
