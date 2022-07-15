@@ -76,11 +76,11 @@ CREATE TABLE `menu_plato` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `menu_plato` (`menu_id`, `plato_id`, `dia`, `precio`) VALUES
-(1, 1, 1, 1,50),
-(2, 2, 1, 2,50),
-(3, 3, 1, 1,50),
-(4, 4, 1, 3,00),
-(5, 5, 1, 1,50);
+(1, 1, 1, 1.50),
+(2, 2, 1, 2.50),
+(3, 3, 1, 1.50),
+(4, 4, 1, 3.00),
+(5, 5, 1, 1.50);
 
 -- --------------------------------------------------------
 
@@ -180,12 +180,12 @@ CREATE TABLE `usuario` (
   `estado` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `usuario` (`id`, `nombre`, `usuario`, `contraseña`, `cliente_id`, `estado`) VALUES
-(1, 'Miguel Fernandez', 'mfernan', '123', '1', 'activo'),
-(2, 'Antonio Parrales', 'aparra', '123', '2', 'activo'),
-(3, 'Andrea Yepez', 'ayepez', '123', '3', 'activo'),
-(4, 'Jorge Delgado', 'jdelga', '123', '1', 'activo'),
-(5, 'Luis Santiesteban', 'lsanti', '123', '2', 'activo'),
+INSERT INTO `usuario` (`id`, `nombre`, `usuario`, `contrasena`, `cliente_id`, `estado`) VALUES
+(1, 'Miguel Fernandez', 'mfernan', '123', 1, 'activo'),
+(2, 'Antonio Parrales', 'aparra', '123', 2, 'activo'),
+(3, 'Andrea Yepez', 'ayepez', '123', 3, 'activo'),
+(4, 'Jorge Delgado', 'jdelga', '123', 1, 'activo'),
+(5, 'Luis Santiesteban', 'lsanti', '123', 2, 'activo');
 
 --
 -- Índices para tablas volcadas
