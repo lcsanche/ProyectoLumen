@@ -52,11 +52,16 @@ INSERT INTO `cliente` (`id`, `nombre`, `direccion`, `ruc`, `telefono`) VALUES
 
 CREATE TABLE `menu` (
   `id` int(11) NOT NULL,
-  `fecha_inicio` date NOT NULL,
-  `fecha_fin` date NOT NULL,
+  `fecha` date NOT NULL,
   `estado` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+INSERT INTO `menu` (`id`, `fecha`, `estado`) VALUES
+(1, '27-06-2022', 'Caducado'),
+(2, '04-07-2022', 'Caducado'),
+(3, '11-07-2022', 'Activo'),
+(4, '18-07-2022', 'Pendiente'),
+(5, '25-07-2022', 'Pendiente');
 -- --------------------------------------------------------
 
 --
@@ -66,9 +71,16 @@ CREATE TABLE `menu` (
 CREATE TABLE `menu_plato` (
   `menu_id` int(11) NOT NULL,
   `plato_id` int(11) NOT NULL,
-  `dia` date NOT NULL,
-  `precion` double NOT NULL
+  `dia` int(2) NOT NULL,
+  `precio` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `menu_plato` (`menu_id`, `plato_id`, `dia`, `precio`) VALUES
+(1, 1, '01', '1.50'),
+(2, 2, '01', '2.50'),
+(3, 3, '01', '1.50'),
+(4, 4, '01', '3.00'),
+(5, 5, '01', '1.50');
 
 -- --------------------------------------------------------
 
@@ -83,6 +95,13 @@ CREATE TABLE `pedido_cab` (
   `fecha_pedido` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+INSERT INTO `pedido_cab` (`id`, `menu_id`, `cliente_id`, `fecha_pedido`) VALUES
+(1, 3, 1, '11-07-2022'),
+(2, 3, 2, '11-07-2022'),
+(3, 3, 3, '11-07-2022'),
+(4, 2, 1, '04-07-2022'),
+(5, 2, 2, '04-07-2022');
+
 -- --------------------------------------------------------
 
 --
@@ -94,6 +113,13 @@ CREATE TABLE `pedido_det` (
   `menu_plato_id` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `pedido_det` (`pedido_cab`, `menu_plato_id`, `cantidad`) VALUES
+(1, 1, '100'),
+(2, 2, '150'),
+(3, 3, '200'),
+(4, 4, '250'),
+(5, 5, '300');
 
 -- --------------------------------------------------------
 
@@ -113,11 +139,11 @@ CREATE TABLE `plato` (
 --
 
 INSERT INTO `plato` (`plato_id`, `tipo_plato`, `nombre`, `descripcion`) VALUES
-(2, 1, 'Sopa de pollo', 'Sopa de pollo con legumbres'),
-(3, 2, 'Arroz con puré y carne', 'Arroz con puré y carne frita con ensalada'),
-(4, 1, 'Sopa de lentejas', 'Sopa de lentejas y queso con trocitos de verde'),
-(5, 3, 'Pollo y vegetales', 'Pollo a la plancha con vegetales'),
-(6, 2, 'Arroz con pollo', 'Arroz con pollo y ensalada de remolacha');
+(1, 1, 'Sopa de pollo', 'Sopa de pollo con legumbres'),
+(2, 2, 'Arroz con puré y carne', 'Arroz con puré y carne frita con ensalada'),
+(3, 1, 'Sopa de lentejas', 'Sopa de lentejas y queso con trocitos de verde'),
+(4, 3, 'Pollo y vegetales', 'Pollo a la plancha con vegetales'),
+(4, 2, 'Arroz con pollo', 'Arroz con pollo y ensalada de remolacha');
 
 -- --------------------------------------------------------
 
@@ -153,6 +179,13 @@ CREATE TABLE `usuario` (
   `cliente_id` int(11) NOT NULL,
   `estado` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `usuario` (`id`, `nombre`, `usuario`, `contraseña`, `cliente_id`, `estado`) VALUES
+(1, 'Miguel Fernandez', 'mfernan', '123', '1', 'activo'),
+(2, 'Antonio Parrales', 'aparra', '123', '2', 'activo'),
+(3, 'Andrea Yepez', 'ayepez', '123', '3', 'activo'),
+(4, 'Jorge Delgado', 'jdelga', '123', '1', 'activo'),
+(5, 'Luis Santiesteban', 'lsanti', '123', '2', 'activo'),
 
 --
 -- Índices para tablas volcadas
