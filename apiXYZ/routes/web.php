@@ -17,22 +17,27 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->group(['prefix' => 'api'], function () use ($router) {
-    $router->get('pedidos',  ['uses' => 'PedidoCabController@showAllPedidos']);
-  });
 
 // Respuesta MENU  
-$router->group(['prefix' => 'api'], function () use ($router) {
-    $router->get('menu',  ['uses' => 'MenuController@getMenu']);
-    $router->get('menu/{id}',  ['uses' => 'MenuPlatoController@getMenuSemana']);
-    $router->get('menu/{id}/{dia}',  ['uses' => 'MenuPlatoController@getMenuDia']);
+$router->group(['prefix' => 'api/menu'], function () use ($router) {
+    $router->get('/',  ['uses' => 'MenuController@getMenu']);
+    $router->get('/{id}',  ['uses' => 'MenuPlatoController@getMenuSemana']);
+    $router->get('/{id}/{dia}',  ['uses' => 'MenuPlatoController@getMenuDia']);
 
-    $router->post('menu',  ['uses' => 'MenuController@postMenu']);
-    $router->post('menu/{id}',  ['uses' => 'MenuPlatoController@postMenuPlato']);
-    $router->post('menu/{id}/{dia}',  ['uses' => 'MenuPlatoController@postMenuPlato']);
+    $router->post('',  ['uses' => 'MenuController@postMenu']);
+    $router->post('/{id}',  ['uses' => 'MenuPlatoController@postMenuPlato']);
+    $router->post('/{id}/{dia}',  ['uses' => 'MenuPlatoController@postMenuPlato']);
 
-    $router->put('menu/{id}/{dia}',  ['uses' => 'MenuPlatoController@postPlatoPorDia']);
+    $router->put('/{id}/{dia}',  ['uses' => 'MenuPlatoController@postPlatoPorDia']);
     
-    $router->delete('menu/{id}/{dia}',  ['uses' => 'MenuPlatoController@deletePlatoPorDia']);
+    $router->delete('/{id}/{dia}',  ['uses' => 'MenuPlatoController@deletePlatoPorDia']);
 });
 //
+$router->group(['prefix' => 'api/pedidos'], function () use ($router) {
+    $router->get('/',  ['uses' => 'PedidoCabController@showAllPedidos']);
+    $router->get('/{id}',  ['uses' => 'PedidoCabController@showOnePedido']);
+    $router->get('/Client/{id}',  ['uses' => 'PedidoCabController@showPedidoByCliente']);
+    $router->post('/', ['uses' => 'PedidoCabController@createPedido']);
+    $router->post('/{id}', ['uses' => 'PedidoCabController@updatePedido']);
+    $router->delete('/{id}', ['uses' => 'PedidoCabController@deletePedido']);
+});
