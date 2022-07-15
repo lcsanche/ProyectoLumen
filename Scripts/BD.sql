@@ -1,33 +1,17 @@
--- phpMyAdmin SQL Dump
--- version 5.2.0
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 15-07-2022 a las 03:33:18
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de datos: `xyz`
 --
 
 -- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `cliente`
+-- Estructura de Tabla: cliente
 --
 
-CREATE TABLE `cliente` (
+CREATE TABLE IF NOT EXISTS `cliente` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `direccion` varchar(150) NOT NULL,
@@ -35,22 +19,17 @@ CREATE TABLE `cliente` (
   `telefono` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `cliente`
---
-
 INSERT INTO `cliente` (`id`, `nombre`, `direccion`, `ruc`, `telefono`) VALUES
 (1, 'Viamatica', 'Edificio San Francisco 300', '0978454714001', 955555555),
 (2, 'Banco Guayaquil', '9 de octubre', '0987542525001', 992969119),
 (3, 'Pycca', '9 de octubre', '0902145644001', 983266774);
 
 -- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `menu`
+-- Estructura de Tabla: menu
 --
 
-CREATE TABLE `menu` (
+CREATE TABLE IF NOT EXISTS `menu` (
   `id` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `estado` varchar(10) NOT NULL
@@ -62,13 +41,13 @@ INSERT INTO `menu` (`id`, `fecha`, `estado`) VALUES
 (3, '2022-07-11', 'Activo'),
 (4, '2022-07-18', 'Pendiente'),
 (5, '2022-07-25', 'Pendiente');
+
 -- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `menu_plato`
+-- -- Estructura de Tabla: menu_plato
 --
 
-CREATE TABLE `menu_plato` (
+CREATE TABLE IF NOT EXISTS `menu_plato` (
   `menu_id` int(11) NOT NULL,
   `plato_id` int(11) NOT NULL,
   `dia` int(2) NOT NULL,
@@ -83,12 +62,11 @@ INSERT INTO `menu_plato` (`menu_id`, `plato_id`, `dia`, `precio`) VALUES
 (5, 5, 1, 1.50);
 
 -- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `pedido_cab`
+-- -- Estructura de Tabla: pedido_cab
 --
 
-CREATE TABLE `pedido_cab` (
+CREATE TABLE IF NOT EXISTS `pedido_cab` (
   `id` int(11) NOT NULL,
   `menu_id` int(11) NOT NULL,
   `cliente_id` int(11) NOT NULL,
@@ -103,12 +81,11 @@ INSERT INTO `pedido_cab` (`id`, `menu_id`, `cliente_id`, `fecha_pedido`) VALUES
 (5, 2, 2, '2022-07-04');
 
 -- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `pedido_det`
+-- -- Estructura de Tabla: pedido_det
 --
 
-CREATE TABLE `pedido_det` (
+CREATE TABLE IF NOT EXISTS `pedido_det` (
   `pedido_cab` int(11) NOT NULL,
   `menu_plato_id` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL
@@ -122,43 +99,33 @@ INSERT INTO `pedido_det` (`pedido_cab`, `menu_plato_id`, `cantidad`) VALUES
 (5, 5, 300);
 
 -- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `plato`
+-- -- Estructura de Tabla: plato
 --
 
-CREATE TABLE `plato` (
+CREATE TABLE IF NOT EXISTS `plato` (
   `plato_id` int(11) NOT NULL,
   `tipo_plato` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `descripcion` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `plato`
---
-
 INSERT INTO `plato` (`plato_id`, `tipo_plato`, `nombre`, `descripcion`) VALUES
 (1, 1, 'Sopa de pollo', 'Sopa de pollo con legumbres'),
 (2, 2, 'Arroz con puré y carne', 'Arroz con puré y carne frita con ensalada'),
 (3, 1, 'Sopa de lentejas', 'Sopa de lentejas y queso con trocitos de verde'),
 (4, 3, 'Pollo y vegetales', 'Pollo a la plancha con vegetales'),
-(4, 2, 'Arroz con pollo', 'Arroz con pollo y ensalada de remolacha');
+(5, 2, 'Arroz con pollo', 'Arroz con pollo y ensalada de remolacha');
 
 -- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `tipo_plato`
+-- -- Estructura de Tabla: tipo_plato
 --
 
-CREATE TABLE `tipo_plato` (
+CREATE TABLE IF NOT EXISTS `tipo_plato` (
   `id` int(11) NOT NULL,
   `nombre` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `tipo_plato`
---
 
 INSERT INTO `tipo_plato` (`id`, `nombre`) VALUES
 (1, 'Sopa'),
@@ -166,12 +133,11 @@ INSERT INTO `tipo_plato` (`id`, `nombre`) VALUES
 (3, 'Dieta');
 
 -- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `usuario`
+-- -- Estructura de Tabla: usuario
 --
 
-CREATE TABLE `usuario` (
+CREATE TABLE IF NOT EXISTS `usuario` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `usuario` varchar(60) NOT NULL,
@@ -322,7 +288,3 @@ ALTER TABLE `plato`
 ALTER TABLE `usuario`
   ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`cliente_id`) REFERENCES `cliente` (`id`);
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
