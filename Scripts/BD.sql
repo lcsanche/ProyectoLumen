@@ -66,14 +66,14 @@ INSERT INTO `menu_plato` (`menu_id`, `plato_id`, `dia`, `precio`) VALUES
 -- -- Estructura de Tabla: pedido_cab
 --
 
-CREATE TABLE IF NOT EXISTS `pedido_cab` (
+CREATE TABLE IF NOT EXISTS `pedido_cabs` (
   `id` int(11) NOT NULL,
   `menu_id` int(11) NOT NULL,
   `cliente_id` int(11) NOT NULL,
   `fecha_pedido` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `pedido_cab` (`id`, `menu_id`, `cliente_id`, `fecha_pedido`) VALUES
+INSERT INTO `pedido_cabs` (`id`, `menu_id`, `cliente_id`, `fecha_pedido`) VALUES
 (1, 3, 1, '2022-07-11'),
 (2, 3, 2, '2022-07-11'),
 (3, 3, 3, '2022-07-11'),
@@ -177,9 +177,9 @@ ALTER TABLE `menu_plato`
   ADD KEY `plato_id` (`plato_id`);
 
 --
--- Indices de la tabla `pedido_cab`
+-- Indices de la tabla `pedido_cabs`
 --
-ALTER TABLE `pedido_cab`
+ALTER TABLE `pedido_cabs`
   ADD PRIMARY KEY (`id`),
   ADD KEY `cliente_id` (`cliente_id`),
   ADD KEY `menu_id` (`menu_id`);
@@ -228,9 +228,9 @@ ALTER TABLE `menu`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `pedido_cab`
+-- AUTO_INCREMENT de la tabla `pedido_cabs`
 --
-ALTER TABLE `pedido_cab`
+ALTER TABLE `pedido_cabs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -263,9 +263,9 @@ ALTER TABLE `menu_plato`
   ADD CONSTRAINT `menu_plato_ibfk_2` FOREIGN KEY (`plato_id`) REFERENCES `plato` (`plato_id`);
 
 --
--- Filtros para la tabla `pedido_cab`
+-- Filtros para la tabla `pedido_cabs`
 --
-ALTER TABLE `pedido_cab`
+ALTER TABLE `pedido_cabs`
   ADD CONSTRAINT `pedido_cab_ibfk_1` FOREIGN KEY (`cliente_id`) REFERENCES `cliente` (`id`),
   ADD CONSTRAINT `pedido_cab_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`id`);
 
@@ -273,7 +273,7 @@ ALTER TABLE `pedido_cab`
 -- Filtros para la tabla `pedido_det`
 --
 ALTER TABLE `pedido_det`
-  ADD CONSTRAINT `pedido_det_ibfk_1` FOREIGN KEY (`pedido_cab`) REFERENCES `pedido_cab` (`id`),
+  ADD CONSTRAINT `pedido_det_ibfk_1` FOREIGN KEY (`pedido_cab`) REFERENCES `pedido_cabs` (`id`),
   ADD CONSTRAINT `pedido_det_ibfk_2` FOREIGN KEY (`menu_plato_id`) REFERENCES `menu_plato` (`plato_id`);
 
 --
