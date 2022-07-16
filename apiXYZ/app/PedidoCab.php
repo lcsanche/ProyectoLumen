@@ -6,8 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class PedidoCab extends Model
 {
+<<<<<<< HEAD
+
+=======
     const CREATED_AT = null;
     const UPDATED_AT = null;
+>>>>>>> bec72725cd436e49b3cf781ba399dc02b5ab1df7
     /**
      * The attributes that are mass assignable.
      *

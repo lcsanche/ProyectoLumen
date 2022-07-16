@@ -7,15 +7,36 @@ use App\PedidoDet;
 use App\Cliente;
 use Illuminate\Http\Request;
 
+<<<<<<< HEAD
+class PedidoCabController extends Controller
+{
+    
+    public function showAllPedidos()
+    {
+=======
 class PedidoCabController extends Controller {
     
     public function showAllPedidos(){
+>>>>>>> bec72725cd436e49b3cf781ba399dc02b5ab1df7
         
         return response()->json(PedidoCab::All());
         //retornar el detalle de los pedidos, y la informacion del cliente
 
     }
 
+<<<<<<< HEAD
+    public function showPedidoByCliente($id)
+    {
+        return response()->json(PedidoCab::where('cliente_id', $id)->get());
+    }
+
+    public function showOnePedido($id)
+    {
+        return response()->json(PedidoCab::find($id));
+    }
+
+
+=======
     public function showPedidoByCliente($id){
         return response()->json(PedidoCab::where('cliente_id', $id)->get());
     }
@@ -74,4 +95,5 @@ class PedidoCabController extends Controller {
                 "para completar el proceso");
         }
     }
+>>>>>>> bec72725cd436e49b3cf781ba399dc02b5ab1df7
 }
