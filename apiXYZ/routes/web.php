@@ -23,14 +23,10 @@ $router->group(['prefix' => 'api/menu'], function () use ($router) {
     $router->get('/',  ['uses' => 'MenuController@getMenu']);
     $router->get('/{id}',  ['uses' => 'MenuPlatoController@getMenuSemana']);
     $router->get('/{id}/{dia}',  ['uses' => 'MenuPlatoController@getMenuDia']);
-
     $router->post('',  ['uses' => 'MenuController@postMenu']);
     $router->post('/{id}',  ['uses' => 'MenuPlatoController@postMenuPlato']);
-    $router->post('/{id}/{dia}',  ['uses' => 'MenuPlatoController@postMenuPlato']);
-
-    $router->put('/{id}/{dia}',  ['uses' => 'MenuPlatoController@postPlatoPorDia']);
-    
-    $router->delete('/{id}/{dia}',  ['uses' => 'MenuPlatoController@deletePlatoPorDia']);
+    $router->put('editar/{id}',  ['uses' => 'MenuPlatoController@putPlatoPorDia']); // Error Clave Foránea
+    $router->delete('/{id}/{dia}',  ['uses' => 'MenuPlatoController@deletePlatoPorDia']); // Error Clave Foránea
 });
 //
 $router->group(['prefix' => 'api/pedidos'], function () use ($router) {

@@ -21,6 +21,6 @@ class MenuController extends Controller
 
         $dataMenu->save();
 
-        return response()->json($request);
+        return response()->json("Información de menú agregada con éxito");
     }
 }

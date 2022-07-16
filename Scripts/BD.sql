@@ -26,16 +26,16 @@ INSERT INTO `cliente` (`id`, `nombre`, `direccion`, `ruc`, `telefono`) VALUES
 
 -- --------------------------------------------------------
 --
--- Estructura de Tabla: menu
+-- Estructura de Tabla: menus
 --
 
-CREATE TABLE IF NOT EXISTS `menu` (
+CREATE TABLE IF NOT EXISTS `menus` (
   `id` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `estado` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `menu` (`id`, `fecha`, `estado`) VALUES
+INSERT INTO `menus` (`id`, `fecha`, `estado`) VALUES
 (1, '2022-06-27', 'Caducado'),
 (2, '2022-07-04', 'Caducado'),
 (3, '2022-07-11', 'Activo'),
@@ -44,17 +44,17 @@ INSERT INTO `menu` (`id`, `fecha`, `estado`) VALUES
 
 -- --------------------------------------------------------
 --
--- -- Estructura de Tabla: menu_plato
+-- -- Estructura de Tabla: menu_platos
 --
 
-CREATE TABLE IF NOT EXISTS `menu_plato` (
+CREATE TABLE IF NOT EXISTS `menu_platos` (
   `menu_id` int(11) NOT NULL,
   `plato_id` int(11) NOT NULL,
   `dia` int(2) NOT NULL,
   `precio` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `menu_plato` (`menu_id`, `plato_id`, `dia`, `precio`) VALUES
+INSERT INTO `menu_platos` (`menu_id`, `plato_id`, `dia`, `precio`) VALUES
 (1, 1, 1, 1.50),
 (2, 2, 1, 2.50),
 (3, 3, 1, 1.50),
@@ -164,15 +164,15 @@ ALTER TABLE `cliente`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `menu`
+-- Indices de la tabla `menus`
 --
-ALTER TABLE `menu`
+ALTER TABLE `menus`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `menu_plato`
+-- Indices de la tabla `menu_platos`
 --
-ALTER TABLE `menu_plato`
+ALTER TABLE `menu_platos`
   ADD KEY `menu_id` (`menu_id`),
   ADD KEY `plato_id` (`plato_id`);
 
@@ -222,9 +222,9 @@ ALTER TABLE `cliente`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de la tabla `menu`
+-- AUTO_INCREMENT de la tabla `menus`
 --
-ALTER TABLE `menu`
+ALTER TABLE `menus`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -256,10 +256,10 @@ ALTER TABLE `usuario`
 --
 
 --
--- Filtros para la tabla `menu_plato`
+-- Filtros para la tabla `menu_platos`
 --
-ALTER TABLE `menu_plato`
-  ADD CONSTRAINT `menu_plato_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`id`),
+ALTER TABLE `menu_platos`
+  ADD CONSTRAINT `menu_plato_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`),
   ADD CONSTRAINT `menu_plato_ibfk_2` FOREIGN KEY (`plato_id`) REFERENCES `plato` (`plato_id`);
 
 --
@@ -267,14 +267,14 @@ ALTER TABLE `menu_plato`
 --
 ALTER TABLE `pedido_cabs`
   ADD CONSTRAINT `pedido_cab_ibfk_1` FOREIGN KEY (`cliente_id`) REFERENCES `cliente` (`id`),
-  ADD CONSTRAINT `pedido_cab_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`id`);
+  ADD CONSTRAINT `pedido_cab_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`);
 
 --
 -- Filtros para la tabla `pedido_det`
 --
 ALTER TABLE `pedido_det`
   ADD CONSTRAINT `pedido_det_ibfk_1` FOREIGN KEY (`pedido_cab`) REFERENCES `pedido_cabs` (`id`),
-  ADD CONSTRAINT `pedido_det_ibfk_2` FOREIGN KEY (`menu_plato_id`) REFERENCES `menu_plato` (`plato_id`);
+  ADD CONSTRAINT `pedido_det_ibfk_2` FOREIGN KEY (`menu_plato_id`) REFERENCES `menu_platos` (`plato_id`);
 
 --
 -- Filtros para la tabla `plato`

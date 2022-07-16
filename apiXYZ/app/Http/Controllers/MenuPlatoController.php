@@ -30,24 +30,23 @@ class MenuPlatoController extends Controller
 
         $dataPlato->save();
 
-        return response()->json($request);
+        return response()->json("Agregando nuevo plato al menú de la semana con id: ".$id."");
     }
 
-    public function postPlatoPorDia(Request $request, $id, $dia)
+    // Error con las claves foráneas
+    public function putPlatoPorDia(Request $request, $id)
     {
         $dataPlato = new MenuPlato;
-        $dataPlato->where('menu_id', $id)->where('dia', $dia);
-
-        $dataPlato->menu_id=$id;
-        $dataPlato->plato_id=$request->input('plato_id');
-        $dataPlato->dia=$request->dia;
-        $dataPlato->precio=$request->input('precio');
-
-        $dataPlato->save();
-
-        return response()->json($request);
+        $peticion = $request->json()->all();
+        $dataPlato->where('menu_id', $id)->update([
+            'plato_id' => $peticion['plato_id'], 
+            'dia' => $peticion['dia'], 
+            'precio' => $peticion['precio']
+        ]);
+        return response()->json("Plato modificado con éxito");
     }
 
+    // Error con las claves foráneas
     public function deletePlatoPorDia(Request $request, $id, $dia)
     {
         $aEliminar = $request->plato_id;
