@@ -32,3 +32,24 @@ $router->group(['prefix' => 'api/tipo-platos'], function () use ($router) {
     $router->put('/{id}',  'TipoPlatoController@update');
     $router->delete('/{id}',  'TipoPlatoController@destroy');
 });
+
+// Respuesta MENU  
+$router->group(['prefix' => 'api/menu'], function () use ($router) {
+    $router->get('/',  ['uses' => 'MenuController@getMenu']);
+    $router->get('/{id}',  ['uses' => 'MenuPlatoController@getMenuSemana']);
+    $router->get('/{id}/{dia}',  ['uses' => 'MenuPlatoController@getMenuDia']);
+    $router->post('',  ['uses' => 'MenuController@postMenu']);
+    $router->post('/{id}',  ['uses' => 'MenuPlatoController@postMenuPlato']);
+    $router->put('editar/{id}',  ['uses' => 'MenuPlatoController@putPlatoPorDia']); // Error Clave Foránea
+    $router->delete('/{id}/{dia}',  ['uses' => 'MenuPlatoController@deletePlatoPorDia']); // Error Clave Foránea
+});
+
+$router->group(['prefix' => 'api/pedidos'], function () use ($router) {
+    $router->get('/',  ['uses' => 'PedidoCabController@showAllPedidos']);
+    $router->get('/{id}',  ['uses' => 'PedidoCabController@showOnePedido']);
+    $router->get('/Client/{id}',  ['uses' => 'PedidoCabController@showPedidoByCliente']);
+    $router->post('/', ['uses' => 'PedidoCabController@createPedido']);
+    $router->post('/{id}', ['uses' => 'PedidoCabController@updatePedido']);
+    $router->delete('/{id}', ['uses' => 'PedidoCabController@deletePedido']);
+
+});    
